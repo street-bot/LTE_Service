@@ -8,7 +8,7 @@ interface=$(ls /sys/class/net | grep ww)
 
 # Continuously refresh connection
 while true; do
-    ping -I $interface -c 1 -w 2 $test_host
+    ping -I $interface -c 1 -w 2 $test_host 2&>/dev/null
 
     if [ $? -eq 0 ]; then
         echo "Connection on $interface up, reconnect not required..."
@@ -21,5 +21,5 @@ while true; do
 	udhcpc -f -n -q -t 5 -i $interface
     fi
 
-    sleep 5
+    sleep 30
 done
