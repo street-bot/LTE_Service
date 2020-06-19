@@ -1,15 +1,16 @@
 [Unit]
 Description=SSH Tunnel to Kubernetes Relay
-After=network.target
+After=network-online.target
 
 [Service]
 Type=oneshot
 Environment="AUTOSSH_GATETIME=0"
 
-
-# To Do -> have this read a key otherwise it should be ready to go
 ExecStart=/bin/su -c "/usr/bin/autossh -M 0 -f -q -f -N -o \"ServerAliveInterval 60\" -o \"ServerAliveCountMax 3\" -o \"StrictHostKeyChecking=no\" -o \"PubkeyAuthentication=yes\" -o \"PasswordAuthentication=no\" -i /home/streetbot/.ssh/id_rsa -R 2223:localhost:22 -p 4454 streetbot@relay.street-bot.com" 
 
 
+ExecStop=killall -9 autossh
+
 [Install]
 WantedBy=multi-user.target
+
