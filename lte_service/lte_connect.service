@@ -1,0 +1,18 @@
+[Unit]
+Description=LTE Auto Connection
+After=dev-cdc-wdm0.device
+After=network.target
+
+
+[Service]
+ExecStart=/bin/sh /usr/local/sbin/lte_connect.sh
+Environment="LD_LIBRARY_PATH=/usr/lib"
+StandardOutput=inherit
+StandardError=inherit
+
+RestartSec=5
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
