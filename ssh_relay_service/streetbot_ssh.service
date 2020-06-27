@@ -1,0 +1,17 @@
+[Unit]
+Description=SSH Tunnel to Kubernetes Relay
+After=network-online.target
+
+[Service]
+Type=simple
+User=streetbot
+EnvironmentFile=/etc/default/autossh
+ExecStart=
+ExecStart=/usr/bin/autossh $SSH_OPTIONS
+
+RestartSec=5
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

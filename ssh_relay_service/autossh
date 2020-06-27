@@ -1,0 +1,5 @@
+AUTOSSH_POLL=60
+AUTOSSH_FIRST_POLL-39
+AUTOSSH_GATETIME=0
+AUTOSSH_PORT=22000
+SSH_OPTIONS="-N -R 2223:localhost:22 ssh-relay.street-bot.com -i /home/streetbot/.ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 4454 -o ServerAliveInterval=120"
