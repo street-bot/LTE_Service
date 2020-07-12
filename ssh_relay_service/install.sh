@@ -5,7 +5,8 @@ apt-get install autossh
 
 echo "Configuring SSHD"
 sed -i "s/ClientAliveInterval.*/ClientAliveInterval\ 600/g"
-sed -i "s/ClientAliveCountMax.*/ClientAliveCountMax\ 0/g"
+sed -i "s/ClientAliveCountMax.*/ClientAliveCountMax\ 10/g"
+sed -i "s/Compression.*/Compression\ yes/g"
 
 echo "Make sure ClientAliveInerval 60 is set on the relay !"
 echo "Make sure ClientAliveCountMax 6 is set on the relay !"
