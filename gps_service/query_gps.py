@@ -17,7 +17,7 @@ import os
 ser = serial.Serial()
 
 
-# Function for printing debug message 
+# Function for printing debug message
 def debug_print(message):
     if(DEBUG):
         print(message)
@@ -63,7 +63,7 @@ class GNSS:
 
     # Get Responses from the Modem
     def getResponse(self):
-        
+
         if (ser.isOpen() == False):
             ser.open()
 
@@ -85,7 +85,9 @@ class GNSS:
         ser.write(self.compose.encode())
         ser.readline()
         debug_print(self.compose)
-       
+
+    def configureGNSS(self):
+        return self.sendATCommOnce("AT+QGPSCFG=\"gpsnmeatype\",3")
 
     def turnOnGPS(self):
         return self.sendATCommOnce("AT+QGPS=1")
@@ -97,7 +99,7 @@ class GNSS:
     def getPosition(self):
         self.sendATCommOnce("AT+QGPSLOC?")
         response = self.getResponse()
-       
+
         #response format: <latitude>,<longitude> format: ddmm.mmmm N/S,dddmm.mmmm E/W
 
         return response
@@ -106,7 +108,9 @@ class GNSS:
 # Main
 
 gps = GNSS()
+gps.turnOffGPS()
+gps.configureGNSS()
 gps.turnOnGPS()
 gps.getPosition()
-gps.turnOffGPS()
+# gps.turnOffGPS()
 
